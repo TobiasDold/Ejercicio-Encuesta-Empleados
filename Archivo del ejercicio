@@ -1,0 +1,69 @@
+'''Vamos a hacer una encuesta entre los empleados de nuestra empresa para poder planear una actividad grupal con
+motivo del aniversario de la fundación. Para ello, vamos a pedir que nos contesten a una serie de preguntas para
+poder planear la actividad de manera correcta. Se pediran datos como:
+
+    Nombre
+    Departamento
+    Intolerancia al gluten (si/no)
+    Intolerancia a frutos secos (si/no)
+    Color favorito
+    Conductor permiso B1 (si/no)
+
+Con toda esta información, inicializaremos una clase con un constructor y crearemos otra clase que contenga
+varios objetos del tipo anterior.
+
+Como los empleados también nos pueden hacer llegar estas respuestas via carta interna al departamento de RRHH,
+hemos recibido dos sobres con la siguiente información:
+
+Patxi, informática, no, no, Verde, si
+Pere, sistemas, si, no, Rojo, si.
+Tendremos que ser capaces de poder meter nosotros por código los datos que nos han mandado en papel...
+para ello tendremos que crear un método de inserción de datos que usaremos a modo de constructor.
+
+Para ver que los datos son correctos conforme los vamos metiendo, necesitaremos también una función para
+visualizar la información.
+
+No olvides dar las gracias al usuario siempre.'''
+
+
+
+
+class EncuestaEmpleado:#creo la clase encuesta con el constructor.
+    def __init__(self, nombre, departamento, IntoleranciaGluten, IntoleranciaFrutosSecos, ColorFavorito, PermisoB1):
+        self.nombre = nombre
+        self.departamento = departamento
+        self.IntoleranciaGluten = IntoleranciaGluten
+        self.IntoleranciaFrutos = IntoleranciaFrutosSecos
+        self.ColorFavorito = ColorFavorito
+        self.PermisoB1 = PermisoB1
+class ListaEncuesta:
+    def __init__(self):
+        self.EncuestasRespondidas = []
+    def agregarEncuesta(self, encuesta):
+        self.EncuestasRespondidas.append(encuesta)
+
+    def mostrarEncuestas(self):
+        for encuesta in self.EncuestasRespondidas:#Imprimo los datos de las encuestas respondidas.
+            print(f""" DATOS DE LA ENCUESTA 
+            - Nombre: {encuesta.nombre}
+            - Departamento: {encuesta.departamento} 
+            - Intolerancia al gluten: {encuesta.IntoleranciaGluten} 
+            - Intolerancia frutos secos: {encuesta.IntoleranciaFrutos} 
+            - Color favorito: {encuesta.ColorFavorito} 
+            - Permiso de conducir B1: {encuesta.PermisoB1}
+            """)
+
+while True:#Creo las instancias y las meto en la lista EncuestasRespondidas.
+    nombre = input("Nombre: ").title()
+    departamento = input("Departamento: ").title()
+    IntoleranciaGluten = input("Intolerancia al gluten?si/no ").lower()
+    IntoleranciaFrutosSecos = input("Intolerancia a los frutos secos?si/no ").lower()
+    ColorFavorito = input("Color Favorito").title()
+    PermisoB1 = input("Permiso de conducir B1?si/no ").lower()
+
+    datosEncuesta = EncuestaEmpleado(nombre, departamento, IntoleranciaGluten, IntoleranciaFrutosSecos, ColorFavorito, PermisoB1)
+    ListaEncuesta.agregarEncuesta( datosEncuesta)
+
+    continuar = input("Continuar?si/no ").rstrip().lstrip().lower()#Verifico si el usuario quiere seguir o parar.
+    if continuar == "no":
+        quit()
